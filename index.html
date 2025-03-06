@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RainSaver - Smart Rainwater Harvesting Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+   
+    <link rel="stylesheet" href="colorful-theme.css">
+    <!-- Fix JavaScript and translation references -->
+    <script src="main.js" defer></script>
+    <script src="translations.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add animation library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="language-select">
+            <!-- Primary Languages -->
+            <option value="en">English</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            
+            <!-- Major Regional Languages -->
+            <optgroup label="Major Regional Languages">
+                <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                <option value="bn">বাংলা (Bengali)</option>
+                <option value="te">తెలుగు (Telugu)</option>
+                <option value="ta">தமிழ் (Tamil)</option>
+                <option value="mr">मराठी (Marathi)</option>
+                <option value="gu">ગુજરાતી (Gujarati)</option>
+                <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                <option value="ml">മലയാളം (Malayalam)</option>
+                <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                
+            </optgroup>
+            
+            <!-- Other Regional Languages -->
+            <optgroup label="Other Languages">
+                <option value="as">অসমীয়া (Assamese)</option>
+                <option value="ur">اردو (Urdu)</option>
+                <option value="ks">कॉशुर (Kashmiri)</option>
+                <option value="ne">नेपाली (Nepali)</option>
+                <option value="sd">سنڌي (Sindhi)</option>
+                <option value="doi">डोगरी (Dogri)</option>
+                <option value="kok">कोंकणी (Konkani)</option>
+                <option value="mai">मैथिली (Maithili)</option>
+                <option value="mni">মৈতৈলোন্ (Manipuri)</option>
+                <option value="sat">संताली (Santali)</option>
+                <option value="bho">भोजपुरी (Bhojpuri)</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-water"></i> RainSaver</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="lang-home">Home</a></li>
+                    <li><a href="#about" class="lang-about">About</a></li>
+                    <li><a href="#data" class="lang-data">Rainfall Data</a></li>
+                    <li><a href="#solutions" class="lang-solutions">Solutions</a></li>
+                    <li><a href="#community" class="lang-community">Community</a></li>
+                    <li><a href="#contact" class="lang-contact">Contact</a></li>
+                    <!-- Login button removed -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="lang-hero-title">Save Every Drop, Secure Tomorrow</h1>
+                <p class="lang-hero-subtitle">Personalized rainwater harvesting solutions for a sustainable future</p>
+                <div class="hero-cta">
+                    <a href="#location-finder" class="btn btn-primary lang-get-started">Get Started</a>
+                    <a href="#how-it-works" class="btn btn-secondary lang-learn-more">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="img/drop2 copy.png" alt="Rainwater harvesting illustration">
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Finder Section -->
+    <section id="location-finder" class="location-finder">
+        <div class="container">
+            <h2 class="section-title lang-location-title">Find Your Personalized Solution</h2>
+            <p class="section-subtitle lang-location-subtitle">Enter your location to get customized rainwater harvesting recommendations</p>
+            
+            <div class="location-form">
+                <input type="text" id="location-input" placeholder="Enter your city or address" class="lang-location-placeholder">
+                <button id="find-location" class="btn btn-primary lang-find-location">Find Solutions</button>
+                <button id="use-gps" class="btn btn-secondary lang-use-gps"><i class="fas fa-map-marker-alt"></i> Use GPS</button>
+            </div>
+            
+            <!-- Add popup message for solutions -->
+            <div id="solution-popup" class="popup-message">
+                <div class="popup-content">
+                    <span class="close-popup">&times;</span>
+                    <h3 class="lang-finding-solutions">Finding Solutions...</h3>
+                    <div class="loading-spinner"></div>
+                    <p class="lang-analyzing-location">Analyzing your location and rainfall patterns</p>
+                    <div id="solution-results" class="solution-results"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rainfall Data Section -->
+    <section id="data" class="rainfall-data">
+        <div class="container">
+            <h2 class="section-title lang-rainfall-title">Real-Time Rainfall Data</h2>
+            <p class="section-subtitle lang-rainfall-subtitle">Analyze historical and current rainfall patterns in your area</p>
+            
+            <div class="data-visualization">
+                <div class="data-chart">
+                    <canvas id="rainfall-chart"></canvas>
+                </div>
+                <div class="data-insights">
+                    <div class="insight-card">
+                        <i class="fas fa-cloud-rain"></i>
+                        <h3 class="lang-annual-rainfall">Annual Rainfall</h3>
+                        <p id="annual-rainfall-value">-- mm</p>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3 class="lang-rainy-season">Rainy Season</h3>
+                        <p id="rainy-season-value">--</p>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-tint"></i>
+                        <h3 class="lang-water-potential">Harvesting Potential</h3>
+                        <p id="harvesting-potential">-- liters</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions">
+        <div class="container">
+            <h2 class="section-title lang-solutions-title">Personalized Harvesting Solutions</h2>
+            <p class="section-subtitle lang-solutions-subtitle">Discover the best rainwater harvesting techniques for your location</p>
+            
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <img src="img/rooftop.jpeg" alt="Rooftop collection">
+                    <h3 class="lang-rooftop">Rooftop Collection</h3>
+                    <p class="lang-rooftop-desc">Collect rainwater from your roof and store it for later use</p>
+                    <a href="#" class="btn btn-outline lang-learn-more-btn">Learn More</a>
+                </div>
+                <div class="solution-card">
+                    <img src="img/perculation.jpeg" alt="Percolation pits">
+                    <h3 class="lang-percolation">Percolation Pits</h3>
+                    <p class="lang-percolation-desc">Recharge groundwater by allowing rainwater to percolate into the soil</p>
+                    <a href="#" class="btn btn-outline lang-learn-more-btn">Learn More</a>
+                </div>
+                <div class="solution-card">
+                    <img src="img/gardens.jpeg" alt="Rain gardens">
+                    <h3 class="lang-rain-garden">Rain Gardens</h3>
+                    <p class="lang-rain-garden-desc">Beautiful gardens designed to capture and filter rainwater runoff</p>
+                    <a href="#" class="btn btn-outline lang-learn-more-btn">Learn More</a>
+                </div>
+                <div class="solution-card">
+                    <img src="img/underground.jpeg" alt="Underground storage">
+                    <h3 class="lang-underground">Underground Storage</h3>
+                    <p class="lang-underground-desc">Store large volumes of rainwater in underground tanks for long-term use</p>
+                    <a href="#" class="btn btn-outline lang-learn-more-btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Recommendations Section -->
+    <section id="ai-recommendations" class="ai-recommendations">
+        <div class="container">
+            <h2 class="section-title lang-ai-title">AI-Powered Recommendations</h2>
+            <p class="section-subtitle lang-ai-subtitle">Get smart predictions and personalized advice for optimal water conservation</p>
+            
+            <div class="ai-features">
+                <div class="ai-feature">
+                    <i class="fas fa-brain"></i>
+                    <h3 class="lang-prediction">Rainfall Prediction</h3>
+                    <p class="lang-prediction-desc">Our AI analyzes weather patterns to predict future rainfall in your area</p>
+                </div>
+                <div class="ai-feature">
+                    <i class="fas fa-home"></i>
+                    <h3 class="lang-custom-design">Custom System Design</h3>
+                    <p class="lang-custom-design-desc">Get tailored harvesting system designs based on your property and needs</p>
+                </div>
+                <div class="ai-feature">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 class="lang-efficiency">Efficiency Analysis</h3>
+                    <p class="lang-efficiency-desc">Continuous monitoring and suggestions to improve your system's efficiency</p>
+                </div>
+            </div>
+            
+            <div class="ai-recommendation-box" id="ai-recommendation-result">
+                <h3 class="lang-your-recommendation">Your Personalized Recommendation</h3>
+                <p class="lang-recommendation-prompt">Enter your location above to get AI-powered recommendations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="community">
+        <div class="container">
+            <h2 class="section-title lang-community-title">Join Our Water Conservation Community</h2>
+            <p class="section-subtitle lang-community-subtitle">Share experiences, learn from others, and make a collective impact</p>
+            
+            <div class="community-features">
+                <div class="community-feature">
+                    <i class="fas fa-users"></i>
+                    <h3 class="lang-forums">Community Forums</h3>
+                    <p class="lang-forums-desc">Discuss ideas, ask questions, and share your success stories</p>
+                </div>
+                <div class="community-feature">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3 class="lang-projects">Collaborative Projects</h3>
+                    <p class="lang-projects-desc">Join or initiate community-wide water conservation projects</p>
+                </div>
+                <div class="community-feature">
+                    <i class="fas fa-award"></i>
+                    <h3 class="lang-rewards">Water Credits</h3>
+                    <p class="lang-rewards-desc">Earn blockchain-based credits for your conservation efforts</p>
+                </div>
+            </div>
+            
+            <!-- <div class="success-stories">
+                <h3 class="lang-stories">Success Stories</h3>
+                <div class="story-carousel" id="story-carousel">
+                    Stories will be dynamically loaded here
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Government Collaboration Section -->
+    <section id="government" class="government">
+        <div class="container">
+            <h2 class="section-title lang-gov-title">Government Collaboration</h2>
+            <p class="section-subtitle lang-gov-subtitle">Working with public agencies to scale water conservation efforts</p>
+            
+            <div class="gov-features">
+                <div class="gov-feature">
+                    <i class="fas fa-file-contract"></i>
+                    <h3 class="lang-policies">Policy Alignment</h3>
+                    <p class="lang-policies-desc">Stay updated with local water conservation policies and incentives</p>
+                </div>
+                <div class="gov-feature">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3 class="lang-funding">Funding Opportunities</h3>
+                    <p class="lang-funding-desc">Access information about government subsidies for rainwater harvesting</p>
+                </div>
+                <div class="gov-feature">
+                    <i class="fas fa-city"></i>
+                    <h3 class="lang-projects">Public Projects</h3>
+                    <p class="lang-projects-desc">Participate in community-wide water conservation initiatives</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title lang-contact-title">Get in Touch</h2>
+            <p class="section-subtitle lang-contact-subtitle">Have questions? We're here to help!</p>
+            
+            <div class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-pen"></i>
+                    <textarea id="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary lang-send">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>RainSaver BBSR</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>+91 9876543210</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>contact@rainsaver.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login/Register Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active lang-login-tab" data-tab="login">Login</button>
+                <button class="auth-tab lang-register-tab" data-tab="register">Register</button>
+            </div>
+            
+            <div class="auth-form login-form active">
+                <div class="form-group">
+                    <label for="login-email" class="lang-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="lang-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Your Password">
+                </div>
+                <button type="submit" class="btn btn-primary lang-login-btn">Login</button>
+                <p class="forgot-password lang-forgot-password">Forgot Password?</p>
+            </div>
+            
+            <div class="auth-form register-form">
+                <div class="form-group">
+                    <label for="register-name" class="lang-name">Name</label>
+                    <input type="text" id="register-name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="register-email" class="lang-email">Email</label>
+                    <input type="email" id="register-email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <label for="register-password" class="lang-password">Password</label>
+                    <input type="password" id="register-password" placeholder="Your Password">
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm" class="lang-confirm-password">Confirm Password</label>
+                    <input type="password" id="register-confirm" placeholder="Confirm Password">
+                </div>
+                <button type="submit" class="btn btn-primary lang-register-btn">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fas fa-water animate-drop"></i> RainSaver</h2>
+                    <p class="lang-footer-tagline">Smart rainwater harvesting solutions for a sustainable future</p>
+                    <div class="newsletter-signup">
+                        <h3>Stay Updated</h3>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" class="newsletter-input">
+                            <button class="btn btn-primary btn-subscribe">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3 class="lang-quick-links">Quick Links</h3>
+                    <ul>
+                        <li><a href="#home" class="footer-link"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#about" class="footer-link"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#solutions" class="footer-link"><i class="fas fa-chevron-right"></i> Solutions</a></li>
+                        <li><a href="#data" class="footer-link"><i class="fas fa-chevron-right"></i> Rainfall Data</a></li>
+                        <li><a href="#community" class="footer-link"><i class="fas fa-chevron-right"></i> Community</a></li>
+                        <li><a href="#contact" class="footer-link"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 class="lang-connect">Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="app-download">
+                        <h4>Get Our App</h4>
+                        <div class="app-buttons">
+                            <a href="#" class="app-btn"><i class="fab fa-google-play"></i> Play Store</a>
+                            <a href="#" class="app-btn"><i class="fab fa-apple"></i> App Store</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RainSaver. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
+    </footer>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="rainfall-data.js"></script>
+    <script src="location-finder.js"></script>
+    <script src="rainfall-range.js"></script>
+    <script src="solutions.js"></script>
+    <script src="community.js"></script>
+    <script src="language.js"></script>
+    <script src="auth.js"></script>
+    <script src="main.js"></script>
+    
+    <!-- Add geolocation-based language detection -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to detect user's location for automatic language selection
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Get coordinates
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    
+                    // Use reverse geocoding to get country/region
+                    fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Map country codes to language codes
+                            const countryToLang = {
+                                'IN': 'hi', // India to Hindi
+                                'ES': 'es', // Spain to Spanish
+                                'FR': 'fr', // France to French
+                                'DE': 'de', // Germany to German
+                                'CN': 'zh', // China to Chinese
+                                // Add more country-to-language mappings as needed
+                            };
+                            
+                            // Get more specific language based on region within India
+                            if (data.countryCode === 'IN') {
+                                const region = data.principalSubdivision;
+                                const indianRegionToLang = {
+                                    'Tamil Nadu': 'ta',
+                                    'Karnataka': 'kn',
+                                    'Kerala': 'ml',
+                                    'Andhra Pradesh': 'te',
+                                    'Telangana': 'te',
+                                    'Maharashtra': 'mr',
+                                    'Gujarat': 'gu',
+                                    'Punjab': 'pa',
+                                    'Odisha': 'or',
+                                    'West Bengal': 'bn',
+                                    // Add more Indian states and their primary languages
+                                };
+                                
+                                if (indianRegionToLang[region]) {
+                                    setLanguage(indianRegionToLang[region]);
+                                    return;
+                                }
+                            }
+                            
+                            // Set language based on country code
+                            if (countryToLang[data.countryCode]) {
+                                setLanguage(countryToLang[data.countryCode]);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error detecting location:', error);
+                        });
+                }, function(error) {
+                    console.error('Geolocation error:', error);
+                });
+            }
+            
+            // Function to set language and update UI
+            function setLanguage(langCode) {
+                const langSelect = document.getElementById('language-select');
+                if (langSelect && langSelect.querySelector(`option[value="${langCode}"]`)) {
+                    langSelect.value = langCode;
+                    // Trigger the change event to update the UI
+                    const event = new Event('change');
+                    langSelect.dispatchEvent(event);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
